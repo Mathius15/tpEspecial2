@@ -10,15 +10,17 @@ class helper {
             //header("Location: " . BASE_URL . "error");
             $this->view->errorUser();
             die();
+        } else {
+            return true;
         }
     } 
 
     public function booleanLog() {
         session_start();
         if (!isset($_SESSION['IS_LOGGED'])) {
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
 }

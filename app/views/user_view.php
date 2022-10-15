@@ -8,13 +8,15 @@ class userView {
         $this->smarty = new Smarty(); // inicializo Smarty
     }
 
-    function showLogin(){
+    function showLogin($bool){
         $this->smarty->assign('tituloPag',"Login");
+        $this->smarty->assign('bool',$bool);
         $this->smarty->display('login.tpl');
     }
 
-    function errorUser() {
+    function errorUser($bool) {
         $this->smarty->assign('tituloPag',"ERROR");
+        $this->smarty->assign('bool',$bool);
         $this->smarty->display('errorAdmin.tpl');
     }
 }

@@ -12,28 +12,36 @@ class serieController {
         $this->view = new ReviewView;
         $this->model = new serieModel;
         $this->helper = new helper;
+        $this->userView = new userView;
     }
 
     public function showSeries() {
-        $series = $this->model->getSeries();
-        $this->view->showSeries($series);
+        $bool = $this->helper->booleanLog();
+        $series = $this->model->getSeries(); 
+        $this->view->showSeries($series, $bool);
     }
 
     public function showAddSerie() {
-        $this->helper->checkLoggedIn();
-        $this->view->showAddSerie();
+        $bool = $this->helper->booleanLog();
+        if ($bool) {
+            $this->view->showAddSerie($bool);
+        } else {
+            $this->userView->errorUser($bool);
+        }
     }
 
     function addSerie() {
-        $this->helper->checkLoggedIn();
-        $nombre = $_POST['nombre'];
-        $descripcion = $_POST['descripcion'];
-        $puntuacion = $_POST['puntuacion'];
-        $creadores = $_POST['creadores'];
-        $genero = $_POST['genero'];
+        $bool = $this->helper->booleanLog();
+        if ($bool) {
+            $nombre = $_POST['nombre'];
+            $descripcion = $_POST['descripcion'];
+            $puntuacion = $_POST['puntuacion'];
+            $creadores = $_POST['creadores'];
+            $genero = $_POST['genero'];
+        }
 
         if(empty($nombre)||empty($descripcion)||empty($puntuacion)||empty($creadores)||empty($genero)){
-            $this->view->error("ES NECESARIO COMPLETAR TODOS LOS CAMPOS");
+            $this->view->error("ES NECESARIO COMPLETAR TODOS LOS CAMPOS", $bool);
         }
         if($_FILES['imagen']['type']== "image/jpg" || $_FILES['imagen']['type'] == "image/jpeg" 
         || $_FILES['imagen']['type'] == "image/png") {
@@ -51,13 +59,17 @@ class serieController {
     }
 
     function showEditSerie() {
-        $this->helper->checkLoggedIn();
+        $bool = $this->helper->booleanLog();
         $series = $this->model->getSeries();
-        $this->view->editSerie($series);
+        if ($bool) {
+            $this->view->editSerie($series, $bool);
+        } else {
+            $this->userView->errorUser($bool);
+        }
     }
 
     function editSerie(){
-        $this->helper->checkLoggedIn();
+        $bool = $this->helper->booleanLog();
         $nombre = $_POST['nombre'];
         $descripcion = $_POST['descripcion'];
         $puntuacion = $_POST['puntuacion'];
@@ -73,7 +85,7 @@ class serieController {
         }
 
         if($serie == "Seleccionar serie a Editar") {
-            $this->view->error("ES NECESARIO SELECCIONAR UNA SERIE");
+            $this->view->error("ES NECESARIO SELECCIONAR UNA SERIE", $bool);
         } else{
             $this->model->editSerie($nombre, $descripcion, $puntuacion, $creadores, $genero,$serie, $imagen);
             header("Location: " . BASE_URL);

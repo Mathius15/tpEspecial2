@@ -5,19 +5,18 @@ require_once './app/models/user_model.php';
 require_once './app/controllers/helper.php';
 
 class userController {
-    private $helper;
 
     public function __construct() {
         $this->view = new userView;
         $this->model = new userModel;
         $this->reviewView = new ReviewView;
-
-        $authHelper = new helper();
+        $this->helper = new helper;
 
     }
 
     public function showLogin() {
-        $this->view->showLogin();
+        $bool = $this->helper->booleanLog();
+        $this->view->showLogin($bool);
     }
 
     public function validarUsuario() {
@@ -45,16 +44,6 @@ class userController {
         session_start();
         session_destroy();
         header("Location: " . BASE_URL . "login");
-    }
-
-    public function estaLogeado() {
-        $log = false;
-        session_start();
-        if (!isset($_SESSION['IS_LOGGED'])) {
-            $log = true;
-        }
-        return $log;
-
     }
 
 }

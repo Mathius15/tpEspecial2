@@ -14,21 +14,30 @@ class episodioController {
         $this->model = new episodioModel;
         $this->modelSerie = new serieModel;
         $this->helper = new helper;
+        $this->userView = new userView;
 
     }
 
     public function showEpisodios($serie) {
+        $bool = $this->helper->booleanLog();
         $episodios = $this->model->getEpisodios($serie);
-        $this->view->showEpisodios($episodios);
+        $this->view->showEpisodios($episodios, $bool);
     }
 
     public function showAddEpisodio() {
-        $this->helper->checkLoggedIn();
+        $bool = $this->helper->booleanLog();
         $series = $this->modelSerie->getSeries();
-        $this->view->showAddEpisodio($series);
+
+        if ($bool) {
+            $this->view->showAddEpisodio($series, $bool);
+        } else {
+            $this->userView->errorUser($bool);
+        }
+        
     }
 
     function addEpisodio() {
+        $bool = $this->helper->booleanLog();
         $titulo = $_POST['titulo'];
         $duracion = $_POST['duracion'];
         $temporada = $_POST['temporada'];
@@ -37,9 +46,9 @@ class episodioController {
         $serie = $_POST['serie'];
 
         if(empty($titulo)||empty($duracion)||empty($temporada)||empty($descripcion)||empty($puntuacion)||empty($serie)){
-            $this->view->error("ES NECESARIO COMPLETAR TODOS LOS CAMPOS");
+            $this->view->error("ES NECESARIO COMPLETAR TODOS LOS CAMPOS", $bool);
         }else if($serie == "Serie del episodio:"){
-            $this->view->error("ES NECESARIO SELECCIONAR A QUE SERIE PERTENECE");
+            $this->view->error("ES NECESARIO SELECCIONAR A QUE SERIE PERTENECE", $bool);
         }else{
             $id = $this->model->insertEpisodio($titulo, $duracion, $temporada, $descripcion, $puntuacion,$serie);
             
@@ -67,8 +76,13 @@ class episodioController {
     }
 
     public function showEditEpisodio($episodio) {
-        $this->helper->checkLoggedIn();
+        $bool = $this->helper->booleanLog();
         $ep = $this->model->getEpisodioById($episodio);
-        $this->view->showEditEpisodio($ep);
+        if ($bool) {
+            $this->view->showEditEpisodio($ep, $bool);
+        } else {
+            $this->userView->errorUser($bool);
+        }
+        
     }
 }

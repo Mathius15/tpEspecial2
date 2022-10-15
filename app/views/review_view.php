@@ -10,21 +10,20 @@ class ReviewView {
     }
 
 
-    function showSeries($series,) {
+    function showSeries($series,$bool) {
         $this->smarty->assign('reviews',count($series));
         $this->smarty->assign('series',$series);
         $this->smarty->assign('tituloPag',"Series");
-
-
+        $this->smarty->assign('bool',$bool);
 
         $this->smarty->display('reviews.tpl');
     }
-    function showEpisodios($episodios) {
+    function showEpisodios($episodios,$bool) {
+        $this->smarty->assign('bool',$bool);
         if($episodios != null){
             $acordeon = ["One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten"];
     
             $this->smarty->assign('acordeon', $acordeon);
-    
     
             $this->smarty->assign('titulo',$episodios[0]->Serie);
             $this->smarty->assign('tituloPag',$episodios[0]->Serie);
@@ -32,37 +31,45 @@ class ReviewView {
             $this->smarty->assign('i',0);   
             $this->smarty->display('episodios.tpl');
         } else {
-            $this->error("TODAVIA NO HAY EPISODIOS DE ESTA SERIE");
+            $this->smarty->assign('tituloPag',"ERROR");
+            $this->error("TODAVIA NO HAY EPISODIOS DE ESTA SERIE", $bool);
         }
     }
 
-    function showAddSerie() {
+    function showAddSerie($bool) {
         $this->smarty->assign('tituloPag',"Agregar Serie");
+        $this->smarty->assign('bool',$bool);
 
         $this->smarty->display('addSerie.tpl');
     }
 
-    function showAddEpisodio($series) {
+    function showAddEpisodio($series, $bool) {
         $this->smarty->assign('series',$series);
         $this->smarty->assign('tituloPag',"Agregar Episodio");
+        $this->smarty->assign('bool',$bool);
 
         $this->smarty->display('addEpisodio.tpl');
     }
 
-    function editSerie($series) {
+    function editSerie($series, $bool) {
         $this->smarty->assign('tituloPag',"Editar Serie");
         $this->smarty->assign('series',$series);
+        $this->smarty->assign('bool',$bool);
+
         $this->smarty->display('editSerie.tpl');
     }
 
-    function error($error) {
+    function error($error, $bool) {
+        $this->smarty->assign('tituloPag',"ERROR");
         $this->smarty->assign('error',$error);
+        $this->smarty->assign('bool',$bool);
         $this->smarty->display('error.tpl');
     }
 
-    function showEditEpisodio($episodio) {
+    function showEditEpisodio($episodio, $bool) {
         $this->smarty->assign('tituloPag',"Editar Episodio");
         $this->smarty->assign('episodio',$episodio);
+        $this->smarty->assign('bool',$bool);
 
         $this->smarty->assign('titulo',$episodio[0]->Titulo);
         $this->smarty->assign('duracion',$episodio[0]->Duracion);
