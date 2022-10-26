@@ -22,7 +22,7 @@ class userController {
     public function validarUsuario() {
         $email = $_POST['email'];
         $password = $_POST['password'];
-        $hash = password_hash($password, PASSWORD_DEFAULT);
+        $hash = password_hash($password, PASSWORD_DEFAULT); //hashear en bd
         $usuario = $this->model->getUserByEmail($email);
 
         if (!empty($usuario) && password_verify($usuario[0]->password, $hash)) {

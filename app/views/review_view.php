@@ -59,7 +59,7 @@ class ReviewView {
         $this->smarty->display('editSerie.tpl');
     }
 
-    function error($error, $bool) {
+    function error($error, $bool = null) {
         $this->smarty->assign('tituloPag',"ERROR");
         $this->smarty->assign('error',$error);
         $this->smarty->assign('bool',$bool);
