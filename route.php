@@ -1,93 +1,23 @@
 <?php
-require_once './app/controllers/episodio_controller.php';
-require_once './app/controllers/user_controller.php';
-require_once './app/controllers/serie_controller.php';
+require_once './app/controllers/apiController.php';
 
+require_once 'libs/router.php';
+
+$rt = new Router();
 
 define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
 
-// leemos la accion que viene por parametro
-$action = 'home'; // acción por defecto
+$rt->addRoute('series', 'GET', 'apiController', 'getSeries');
+$rt->addRoute('serie/:ID', 'GET', 'apiController', 'getSerie');
 
-if (!empty($_GET['action'])) { // si viene definida la reemplazamos
-    $action = $_GET['action'];
-} else {
-    $action = 'home'; // acción por defecto si no envían
-}
+$rt->addRoute('episodios', 'GET', 'apiController', 'getEpisodios');
+$rt->addRoute('episodio/:ID', 'GET', 'apiController', 'getEpisodio');
 
+$rt->addRoute('serie/:ID', 'DELETE', 'apiController', 'deleteSerie');
+$rt->addRoute('episodio/:ID', 'DELETE', 'apiController', 'deleteEpisodio');
 
-
-// parsea la accion Ej: dev/juan --> ['dev', juan]
-$params = explode('/', $action);
+$rt->addRoute('serie/:ID', 'POST', 'apiController', 'addSeries');
+$rt->addRoute('episodio/:ID', 'POST', 'apiController', 'addEpisodio');
 
 
-$episodioController = new episodioController();
-$userController = new userController();
-$serieController = new serieController();
-
-
-switch ($params[0]) {
-    case 'home':
-        $serieController->showSeries();
-        break;
-
-    case 'login':
-        $userController->showLogin();
-        break;
-
-    case 'logout':
-        $userController->logout();
-
-    case 'validacion':
-        $userController->validarUsuario();
-        break;
-
-    case'serie':
-        $episodioController->showEpisodios($params[1]);
-        break;
-
-    case 'addSerie':
-        $serieController->showAddSerie();
-        break;
-
-    case 'addSerieForm':
-        $serieController->addSerie();
-        break;
-    
-    case 'addEpisodio':
-        $episodioController->showAddEpisodio();
-        break;
-    
-    case 'addEpisodioo':
-        $episodioController->addEpisodio();
-        break;
-
-    case 'borrarSerie':
-        $id = $params[1];
-        $serieController->deleteSerie($id);
-        break;
-
-    case 'borrarEpisodio':
-        $id = $params[1];
-        $episodioController->deleteEpisodio($id);
-        break;
-    
-    case 'editSerie':
-        $serieController->showEditSerie();
-        break;
-    
-    case 'editSerieForm':
-        $serieController->editSerie();
-        break;
-    
-    case 'editEpisodio':
-        $id = $params[1];
-        $episodioController->showEditEpisodio($id);
-        break;
-
-    case 'editEpisodioForm':
-        $id = $params[1];
-        $episodioController->editEpisodio($id);
-        break;
-        
-}
+$router->route($_GET["resource"], $_SERVER['REQUEST_METHOD']);

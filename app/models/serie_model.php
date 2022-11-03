@@ -16,6 +16,16 @@ class serieModel {
         return $series;
     }
 
+    public function getSerie($serie) {
+        $db = new PDO('mysql:host=localhost;'.'dbname=reviews;charset=utf8', 'root', '');
+
+        $query = $db->prepare("SELECT * FROM series WHERE Nombre = ?");
+        $query->execute([$serie]);
+        $series = $query->fetchAll(PDO::FETCH_OBJ);
+
+        return $series;
+    }
+
     private function uploadImage($image){
         $target = "img/serie/" . uniqid() . "." . strtolower(pathinfo($image['name'], PATHINFO_EXTENSION));  
         move_uploaded_file($image['tmp_name'], $target);
