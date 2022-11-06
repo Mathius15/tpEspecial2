@@ -1,6 +1,8 @@
 <?php
+include_once './app/models/serie_model.php';
+include_once './app/views/apiViewer.php';
 
-class apiController {
+class apiControllerSeries {
     private $modelSerie;
     private $modelEpisodio;
 
@@ -10,7 +12,6 @@ class apiController {
 
     public function __construct() {
         $this->modelSerie = new serieModel();
-        $this->modelEpisodio = new episodioModel();
 
         $this->view = new apiViewer();
         
