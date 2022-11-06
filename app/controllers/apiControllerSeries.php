@@ -1,8 +1,4 @@
 <?php
-include_once '../views/apiViewer';
-include_once '../models/episodios_model.php';
-include_once '../models/serie_model.php';
-
 
 class apiController {
     private $modelSerie;
