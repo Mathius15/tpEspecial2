@@ -39,10 +39,14 @@ class apiControllerSeries {
 
     public function deleteSerie($param) {
         $id = $param[':ID'];
+
         $serie = $this->model->getSerie($id);
+
         if($serie) {
             $this->model->deleteSerie($id);
             $this->view->response($serie);
+        } else {
+            $this->view->response("La serie $id no existe", 404);
         }
     }
  
