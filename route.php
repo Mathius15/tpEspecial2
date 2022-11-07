@@ -1,5 +1,6 @@
 <?php
 require_once './app/controllers/apiControllerSeries.php';
+require_once './app/controllers/apiControllerEpisodios.php';
 
 require_once 'libs/router.php';
 
@@ -10,14 +11,14 @@ define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] 
 $rt->addRoute('series', 'GET', 'apiControllerSeries', 'getSeries');
 $rt->addRoute('serie/:ID', 'GET', 'apiControllerSeries', 'getSerie');
 
-$rt->addRoute('episodios', 'GET', 'apiController', 'getEpisodios');
-$rt->addRoute('episodio/:ID', 'GET', 'apiController', 'getEpisodio');
+$rt->addRoute('episodios', 'GET', 'apiControllerEpisodios', 'getAllEpisodios');
+$rt->addRoute('episodios/:ID', 'GET', 'apiControllerEpisodios', 'getEpisodios');
 
-$rt->addRoute('serie/:ID', 'DELETE', 'apiController', 'deleteSerie');
-$rt->addRoute('episodio/:ID', 'DELETE', 'apiController', 'deleteEpisodio');
+$rt->addRoute('serie/:ID', 'DELETE', 'apiControllerSeries', 'deleteSerie');
+$rt->addRoute('episodio/:ID', 'DELETE', 'apiControllerEpisodios', 'deleteEpisodio');
 
 $rt->addRoute('serie/:ID', 'POST', 'apiController', 'addSeries');
-$rt->addRoute('episodio/:ID', 'POST', 'apiController', 'addEpisodio');
+$rt->addRoute('episodio/:ID', 'POST', 'apiControllerEpisodios', 'addEpisodio');
 
 
 $rt->route($_GET["resource"], $_SERVER['REQUEST_METHOD']);

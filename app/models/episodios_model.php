@@ -17,6 +17,16 @@ class episodioModel {
         return $episodios;
     }
 
+    public function getAllEpisodios() {
+        $db = new PDO('mysql:host=localhost;'.'dbname=reviews;charset=utf8', 'root', '');
+
+        $query = $db->prepare("SELECT * FROM episodios");
+        $query->execute();
+        $episodios = $query->fetchAll(PDO::FETCH_OBJ);
+
+        return $episodios;
+    }
+
     public function insertEpisodio($titulo, $duracion, $temporada, $descripcion, $puntuacion, $serie) {
         $query = $this->db->prepare("INSERT INTO episodios(Titulo, Duracion, Temporada, Descripcion, Puntuacion, Serie) VALUES (?, ?, ?, ?, ?, ?)");
         $query->execute([$titulo, $duracion, $temporada, $descripcion, $puntuacion, $serie]);

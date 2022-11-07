@@ -21,9 +21,9 @@ class serieModel {
 
         $query = $db->prepare("SELECT * FROM series WHERE Nombre = ?");
         $query->execute([$serie]);
-        $series = $query->fetchAll(PDO::FETCH_OBJ);
+        $serie = $query->fetchAll(PDO::FETCH_OBJ);
 
-        return $series;
+        return $serie;
     }
 
     private function uploadImage($image){
@@ -40,7 +40,7 @@ class serieModel {
     }
 
     public function deleteSerie($serie) {
-        
+        $this->deleteTodosEpisodios($serie);
         $query = $this->db->prepare('DELETE FROM series WHERE Nombre = ?');
         $query->execute([$serie]);
     }
