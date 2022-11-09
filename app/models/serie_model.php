@@ -43,11 +43,15 @@ class serieModel {
         return $target;
     }
 
-    public function insertSerie($nombre, $descripcion, $puntuacion, $creadores, $genero, $imagen) {
-        $pathImg = $this->uploadImage($imagen);
-        $query = $this->db->prepare("INSERT INTO series (Nombre, Descripcion, Puntuacion, Creadores, Genero, img) VALUES (?, ?, ?, ?, ?, ?)");
-        $query->execute([$nombre,$descripcion, $puntuacion, $creadores, $genero, $pathImg]);
-
+    public function insertSerie($nombre, $descripcion, $puntuacion, $creadores, $genero, $imagen = null) {
+        if($imagen != null) {
+            $pathImg = $this->uploadImage($imagen);
+            $query = $this->db->prepare("INSERT INTO series (Nombre, Descripcion, Puntuacion, Creadores, Genero, img) VALUES (?, ?, ?, ?, ?, ?)");
+            $query->execute([$nombre,$descripcion, $puntuacion, $creadores, $genero, $pathImg]);
+        } else {
+            $query = $this->db->prepare("INSERT INTO series (Nombre, Descripcion, Puntuacion, Creadores, Genero) VALUES (?, ?, ?, ?, ?)");
+            $query->execute([$nombre,$descripcion, $puntuacion, $creadores, $genero]);
+        }
     }
 
     public function deleteSerie($serie) {

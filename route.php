@@ -17,7 +17,7 @@ $rt->addRoute('episodios/:ID', 'GET', 'apiControllerEpisodios', 'getEpisodios');
 $rt->addRoute('serie/:ID', 'DELETE', 'apiControllerSeries', 'deleteSerie');
 $rt->addRoute('episodio/:ID', 'DELETE', 'apiControllerEpisodios', 'deleteEpisodio');
 
-$rt->addRoute('serie', 'POST', 'apiController', 'addSeries');
+$rt->addRoute('serie', 'POST', 'apiControllerSeries', 'addSerie');
 $rt->addRoute('episodio', 'POST', 'apiControllerEpisodios', 'addEpisodio');
 
 

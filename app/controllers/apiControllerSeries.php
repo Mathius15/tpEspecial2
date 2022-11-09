@@ -60,7 +60,18 @@ class apiControllerSeries {
             $this->view->response("La serie $id no existe", 404);
         }
     }
- 
-    
+
+    public function addSerie() {
+        $serie = $this->getData();
+
+        if(empty($serie->Nombre) || empty($serie->Descripcion) || empty($serie->Puntuacion) || empty($serie->Creadores) ||
+        empty($serie->Genero)) {
+            $this->view->response("Es necesario completar todos los datos", 400);
+        } else {
+            $id = $this->model->insertSerie($serie->Nombre, $serie->Descripcion, $serie->Puntuacion, $serie->Creadores, $serie->Genero);
+            $episodio = $this->model->getSerie($id);
+            $this->view->response($serie,201);
+        }
+    }
 
 }

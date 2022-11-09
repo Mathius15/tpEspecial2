@@ -11,7 +11,7 @@ ENDPOINTS:
 (DELETE) http://localhost/WEB2/tpEspecial2/serie/:ID --> Elimina la serie con ese nombre (ID)
 (DELETE) http://localhost/WEB2/tpEspecial2/episodio/:ID --> Elimina el episodio con ese nombre(ID)
 
-(POST) http://localhost/WEB2/tpEspecial2/episodio--> Agrega un episodio con los datos especificados en el body ej:
+(POST) http://localhost/WEB2/tpEspecial2/episodio --> Agrega un episodio con los datos especificados en el body. Ej:
 {
     "Titulo" : "titulaso",
     "Duracion" : "3",
@@ -19,4 +19,12 @@ ENDPOINTS:
     "Descripcion" : "desc",
     "Puntuacion" : "3",
     "Serie" : "Dark"
+}
+(POST) http://localhost/WEB2/tpEspecial2/serie --> Agrega una serie con los datos especificados en el body. Ej:
+{
+    "Nombre" : "Rick_And_Morty",
+    "Descripcion" : "las aventudsada",
+    "Puntuacion" : "9.9",
+    "Creadores" : "justin roiland",
+    "Genero" : "cyfi"
 }
