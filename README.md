@@ -8,6 +8,9 @@ ENDPOINTS:
 (GET) http://localhost/WEB2/tpEspecial2/series?sortBy=ASC -->  Muestra las series ordenadas de forma ascendiente
 (GET) http://localhost/WEB2/tpEspecial2/series?sortBy=DESC --> Muestra las series ordenadas de forma descendiente
 
+(GET) http://localhost/WEB2/tpEspecial2/series?select=Descripcion --> Trae todas las series con el campo especificado (En este caso Descripcion)
+(GET) http://localhost/WEB2/tpEspecial2/episodios?select=Titulo --> Trae todos los episodios con el campo especificado (En este caso Titulo)
+
 (DELETE) http://localhost/WEB2/tpEspecial2/serie/:ID --> Elimina la serie con ese nombre (ID)
 (DELETE) http://localhost/WEB2/tpEspecial2/episodio/:ID --> Elimina el episodio con ese nombre(ID)
 

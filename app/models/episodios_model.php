@@ -17,6 +17,16 @@ class episodioModel {
         return $episodios;
     }
 
+    public function getEpisodiosCampo($campo) {
+        $db = new PDO('mysql:host=localhost;'.'dbname=reviews;charset=utf8', 'root', '');
+ 
+        $query = $db->prepare("SELECT $campo FROM episodios");
+        $query->execute();
+        $episodios = $query->fetchAll(PDO::FETCH_OBJ);
+        
+        return $episodios;
+    }
+
     public function getAllEpisodios() {
         $db = new PDO('mysql:host=localhost;'.'dbname=reviews;charset=utf8', 'root', '');
 

@@ -33,8 +33,18 @@ class apiControllerEpisodios {
     }
 
     public function getAllEpisodios() {
-        $episodios = $this->model->getAllEpisodios();
-        $this->view->response($episodios);
+        if(isset($_GET["select"])) {
+            $campo = $_GET["select"];
+            if($campo === "Titulo" || $campo === "Duracion" || $campo === "Temporada" || $campo === "Descripcion" || $campo === "Puntuacion" || $campo === "Serie"){
+                $episodios = $this->model->getEpisodiosCampo($campo);
+                $this->view->response($episodios);
+            } else {
+                $this->view->response("El campo $campo no existe", 404);
+            }
+        } else {
+            $episodios = $this->model->getAllEpisodios();
+            $this->view->response($episodios);
+        }
     }
 
     public function deleteEpisodio($param) {

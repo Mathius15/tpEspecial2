@@ -37,6 +37,16 @@ class serieModel {
         return $serie;
     }
 
+    public function getSerieCampo($campo) {
+        $db = new PDO('mysql:host=localhost;'.'dbname=reviews;charset=utf8', 'root', '');
+
+        $query = $db->prepare("SELECT $campo FROM series");
+        $query->execute();
+        $serie = $query->fetchAll(PDO::FETCH_OBJ);
+        
+        return $serie;
+    }
+
     private function uploadImage($image){
         $target = "img/serie/" . uniqid() . "." . strtolower(pathinfo($image['name'], PATHINFO_EXTENSION));  
         move_uploaded_file($image['tmp_name'], $target);

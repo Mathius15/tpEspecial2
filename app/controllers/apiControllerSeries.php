@@ -22,13 +22,22 @@ class apiControllerSeries {
     }
 
     public function getSeries() {
-        //$series = $this->model->getSeries();
-        //$this->view->response($series);
-        if(isset($_GET["sortBy"])) { //me fijo si me dan un parametro para ordenar
+        if(isset($_GET["select"]) && isset($_GET["sortBy"])) {
+
+        } elseif(isset($_GET["select"])) {
+            $campo = $_GET["select"];
+            if($campo === "Nombre" || $campo === "Descripcion" || $campo === "Puntuacion" || $campo === "Creadores" || $campo === "Genero") {                
+                $series = $this->model->getSerieCampo($campo);
+                $this->view->response($series);
+            } else{
+                $this->view->response("El campo $campo no existe", 404);
+            }
+        } elseif(isset($_GET["sortBy"])) { //me fijo si me dan un parametro para ordenar
             $sortBy = $_GET["sortBy"];
-            if($sortBy == "ASC" || $sortBy == "DESC")
-            $series = $this->model->getSeries($sortBy);
-            $this->view->response($series);
+            if($sortBy == "ASC" || $sortBy == "DESC"){
+                $series = $this->model->getSeries($sortBy);
+                $this->view->response($series);
+            }
         } else {
             $series = $this->model->getSeries();
             $this->view->response($series);
