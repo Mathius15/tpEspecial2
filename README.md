@@ -11,7 +11,7 @@ ENDPOINTS:
 (DELETE) http://localhost/WEB2/tpEspecial2/serie/:ID --> Elimina la serie con ese nombre (ID)
 (DELETE) http://localhost/WEB2/tpEspecial2/episodio/:ID --> Elimina el episodio con ese nombre(ID)
 
-(POST) http://localhost/WEB2/tpEspecial2/episodio--> Agrega un episodio con los datos especificados
+(POST) http://localhost/WEB2/tpEspecial2/episodio--> Agrega un episodio con los datos especificados en el body ej:
 {
     "Titulo" : "titulaso",
     "Duracion" : "3",
