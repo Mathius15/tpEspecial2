@@ -47,6 +47,17 @@ class serieModel {
         return $serie;
     }
 
+    public function getSerieCampoSort($campo,$sort){
+
+        $db = new PDO('mysql:host=localhost;'.'dbname=reviews;charset=utf8', 'root', '');
+
+        $query = $db->prepare("SELECT * FROM series ORDER BY $campo $sort");
+        $query->execute();
+        $serie = $query->fetchAll(PDO::FETCH_OBJ);
+
+        return $serie;
+    }
+
     private function uploadImage($image){
         $target = "img/serie/" . uniqid() . "." . strtolower(pathinfo($image['name'], PATHINFO_EXTENSION));  
         move_uploaded_file($image['tmp_name'], $target);
