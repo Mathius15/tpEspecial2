@@ -22,20 +22,31 @@ class apiControllerSeries {
     }
 
     public function getSeries() {
-        $series = $this->model->getSeries();
-        $this->view->response($series);
+        //$series = $this->model->getSeries();
+        //$this->view->response($series);
+        if(isset($_GET["sortBy"])) { //me fijo si me dan un parametro para ordenar
+            $sortBy = $_GET["sortBy"];
+            if($sortBy == "ASC" || $sortBy == "DESC")
+            $series = $this->model->getSeries($sortBy);
+            $this->view->response($series);
+        } else {
+            $series = $this->model->getSeries();
+            $this->view->response($series);
+        }
     }
 
     public function getSerie($param) {
         $id = $param[':ID'];
+    
         $serie = $this->model->getSerie($id);
-        
+            
         if($serie) {
             $this->view->response($serie);
         } else {
             $this->view->response("Todavia no hay datos de la serie $id" , 404);
         }
     }
+    
 
     public function deleteSerie($param) {
         $id = $param[':ID'];

@@ -6,11 +6,22 @@ class serieModel {
         $this->db = new PDO('mysql:host=localhost;'.'dbname=reviews;charset=utf8', 'root', '');
     }
 
-    public function getSeries() {
+    public function getSeries($sort = null) {
         $db = new PDO('mysql:host=localhost;'.'dbname=reviews;charset=utf8', 'root', '');
 
-        $query = $db->prepare("SELECT * FROM series");
-        $query->execute();
+        if($sort === "ASC") {
+            $query = $db->prepare("SELECT * FROM series ORDER BY Nombre ASC");
+            var_dump($sort);
+            $query->execute();
+        } elseif($sort === "DESC"){
+            $query = $db->prepare("SELECT * FROM series ORDER BY Nombre DESC");
+            var_dump($sort);
+            $query->execute();
+        } else {
+            $query = $db->prepare("SELECT * FROM series");
+            $query->execute();
+        }
+
         $series = $query->fetchAll(PDO::FETCH_OBJ);
 
         return $series;
