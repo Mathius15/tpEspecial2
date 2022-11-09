@@ -8,5 +8,15 @@ ENDPOINTS:
 (GET) http://localhost/WEB2/tpEspecial2/series?sortBy=ASC -->  Muestra las series ordenadas de forma ascendiente
 (GET) http://localhost/WEB2/tpEspecial2/series?sortBy=DESC --> Muestra las series ordenadas de forma descendiente
 
-(DELETE) 
+(DELETE) http://localhost/WEB2/tpEspecial2/serie/:ID --> Elimina la serie con ese nombre (ID)
+(DELETE) http://localhost/WEB2/tpEspecial2/episodio/:ID --> Elimina el episodio con ese nombre(ID)
 
+(POST) http://localhost/WEB2/tpEspecial2/episodio--> Agrega un episodio con los datos especificados
+{
+    "Titulo" : "titulaso",
+    "Duracion" : "3",
+    "Temporada" : "3",
+    "Descripcion" : "desc",
+    "Puntuacion" : "3",
+    "Serie" : "Dark"
+}

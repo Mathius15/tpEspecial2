@@ -49,4 +49,17 @@ class apiControllerEpisodios {
             $this->view->response("El episodio $id no existe", 404);
         }
     }
+
+    public function addEpisodio($params = null) {
+        $episodio = $this->getData();
+
+        if(empty($episodio->Titulo) || empty($episodio->Duracion) || empty($episodio->Temporada) || empty($episodio->Descripcion) ||
+        empty($episodio->Puntuacion) || empty($episodio->Serie)) {
+            $this->view->response("Es necesario completar todos los datos", 400);
+        } else {
+            $id = $this->model->insertEpisodio($episodio->Titulo, $episodio->Duracion, $episodio->Temporada, $episodio->Descripcion, $episodio->Puntuacion, $episodio->Serie);
+            $episodio = $this->model->getEpisodio($id);
+            $this->view->response($episodio,201);
+        }
+    }
 }
