@@ -11,11 +11,9 @@ class serieModel {
 
         if($sort === "ASC") {
             $query = $db->prepare("SELECT * FROM series ORDER BY Nombre ASC");
-            var_dump($sort);
             $query->execute();
         } elseif($sort === "DESC"){
             $query = $db->prepare("SELECT * FROM series ORDER BY Nombre DESC");
-            var_dump($sort);
             $query->execute();
         } else {
             $query = $db->prepare("SELECT * FROM series");
