@@ -49,10 +49,20 @@ class apiControllerEpisodios
             } else {
                 $this->view->response("El campo $campo no existe", 404);
             }
+        } elseif(isset($_GET["startAt"]) && isset($_GET["endAt"])){
+            $start = $_GET["startAt"];
+            $end = $_GET["endAt"];
+            if(is_numeric($start) && is_numeric($end)) {
+                $episodios = $this->model->getEpisodioPag($start,$end);
+                $this->view->response($episodios);
+            } else {
+                $this->view->response("Es necesario agregar un numero para la paginacion", 400);
+            }
         } else {
             $episodios = $this->model->getAllEpisodios();
             $this->view->response($episodios);
         }
+
     }
 
     public function deleteEpisodio($param) {

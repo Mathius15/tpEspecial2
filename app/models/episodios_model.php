@@ -27,6 +27,16 @@ class episodioModel {
         return $episodios;
     }
 
+    public function getEpisodioPag($start, $end) {
+        $db = new PDO('mysql:host=localhost;'.'dbname=reviews;charset=utf8', 'root', '');
+
+        $query = $db->prepare("SELECT * FROM episodios LIMIT $start, $end");
+        $query->execute();
+        $episodios = $query->fetchAll(PDO::FETCH_OBJ);
+        
+        return $episodios;
+    }
+
     public function getAllEpisodios() {
         $db = new PDO('mysql:host=localhost;'.'dbname=reviews;charset=utf8', 'root', '');
 

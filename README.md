@@ -12,6 +12,8 @@ ENDPOINTS:
 
 (GET) http://localhost/WEB2/tpEspecial2/api/series?select=Descripcion&sortBy=ASC --> Trae todas las series ordenadas (En este caso ASC) por un campo de la tabla (En este caso Descripcion) |CONSIGNA 9|
 
+(GET) http://localhost/WEB2/tpEspecial2/api/episodios?startAt=2&endAt=5 --> Pagina los episodios entre 2 y 5|CONSIGNA 7|
+
 (DELETE) http://localhost/WEB2/tpEspecial2/api/serie/:ID --> Elimina la serie con ese nombre (ID)
 (DELETE) http://localhost/WEB2/tpEspecial2/api/episodio/:ID --> Elimina el episodio con ese nombre(ID)
 
