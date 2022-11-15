@@ -17,7 +17,7 @@ ENDPOINTS:
 (DELETE) http://localhost/WEB2/tpEspecial2/api/serie/:ID --> Elimina la serie con ese nombre (ID)
 (DELETE) http://localhost/WEB2/tpEspecial2/api/episodio/:ID --> Elimina el episodio con ese nombre(ID)
 
-(POST) http://localhost/WEB2/tpEspecial2/api/episodio --> Agrega un episodio con los datos especificados en el body. Ej: |CONSIGNA 5|
+(POST) http://localhost/WEB2/tpEspecial2/api/episodio --> Agrega un episodio con los datos especificados en el body |CONSIGNA 5|. Ej: 
 {
     "Titulo" : "titulaso",
     "Duracion" : "3",
@@ -26,6 +26,7 @@ ENDPOINTS:
     "Puntuacion" : "3",
     "Serie" : "Dark"
 }
+
 (POST) http://localhost/WEB2/tpEspecial2/api/serie --> Agrega una serie con los datos especificados en el body. Ej:
 {
     "Nombre" : "Rick_And_Morty",
