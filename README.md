@@ -32,3 +32,5 @@ ENDPOINTS:
     "Creadores" : "justin roiland",
     "Genero" : "cyfi"
 }
+
+(GET) http://localhost/WEB2/tpEspecial2/api/users/token --> Poniendo el usuario y contraseña correctos devuelve un token |CONSIGNA 10|
