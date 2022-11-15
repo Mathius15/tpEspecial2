@@ -27,56 +27,46 @@ class apiControllerSeries {
     }
 
     public function getSeries() {
-        $token = $this->token->tokenTrue();
-        if($token) {
-            if(isset($_GET["select"]) && isset($_GET["sortBy"])) {
-                $campo = $_GET["select"];
-                $sortBy = $_GET["sortBy"];
-                if($campo === "Nombre" || $campo === "Descripcion" || $campo === "Puntuacion" || $campo === "Creadores" || $campo === "Genero") {                
-                    $series = $this->model->getSerieCampoSort($campo,$sortBy);
-                    $this->view->response($series);
-                } else {
-                    $this->view->response("El campo $campo no existe", 404);
-                }
-            } elseif(isset($_GET["select"])) {
-                $campo = $_GET["select"];
-                if($campo === "Nombre" || $campo === "Descripcion" || $campo === "Puntuacion" || $campo === "Creadores" || $campo === "Genero") {                
-                    $series = $this->model->getSerieCampo($campo);
-                    $this->view->response($series);
-                } else{
-                    $this->view->response("El campo $campo no existe", 404);
-                }
-            } elseif(isset($_GET["sortBy"])) { //me fijo si me dan un parametro para ordenar
-                $sortBy = $_GET["sortBy"];
-                if($sortBy == "ASC" || $sortBy == "DESC"){
-                    $series = $this->model->getSeries($sortBy);
-                    $this->view->response($series);
-                } else {
-                    $this->view->response("Solo se puede ordenar con ASC o DESC", 404);
-                }
-            } else {
-                $series = $this->model->getSeries();
+        if(isset($_GET["select"]) && isset($_GET["sortBy"])) {
+            $campo = $_GET["select"];
+            $sortBy = $_GET["sortBy"];
+            if($campo === "Nombre" || $campo === "Descripcion" || $campo === "Puntuacion" || $campo === "Creadores" || $campo === "Genero") {                
+                $series = $this->model->getSerieCampoSort($campo,$sortBy);
                 $this->view->response($series);
+            } else {
+                $this->view->response("El campo $campo no existe", 404);
+            }
+        } elseif(isset($_GET["select"])) {
+            $campo = $_GET["select"];
+            if($campo === "Nombre" || $campo === "Descripcion" || $campo === "Puntuacion" || $campo === "Creadores" || $campo === "Genero") {                
+                $series = $this->model->getSerieCampo($campo);
+                $this->view->response($series);
+            } else{
+                $this->view->response("El campo $campo no existe", 404);
+            }
+        } elseif(isset($_GET["sortBy"])) { //me fijo si me dan un parametro para ordenar
+            $sortBy = $_GET["sortBy"];
+            if($sortBy == "ASC" || $sortBy == "DESC"){
+                $series = $this->model->getSeries($sortBy);
+                $this->view->response($series);
+            } else {
+                $this->view->response("Solo se puede ordenar con ASC o DESC", 404);
             }
         } else {
-            $this->view->response("ACCESO DENEGADO", 401);
+            $series = $this->model->getSeries();
+            $this->view->response($series);
         }
     }
 
     public function getSerie($param) {
-        $token = $this->token->tokenTrue();
-        if($token) {
-            $id = $param[':ID'];
-        
-            $serie = $this->model->getSerie($id);
-                
-            if($serie) {
-                $this->view->response($serie);
-            } else {
-                $this->view->response("Todavia no hay datos de la serie $id" , 404);
-            }
+        $id = $param[':ID'];
+    
+        $serie = $this->model->getSerie($id);
+            
+        if($serie) {
+            $this->view->response($serie);
         } else {
-            $this->view->response("ACCESO DENEGADO", 401);
+            $this->view->response("Todavia no hay datos de la serie $id" , 404);
         }
     }
     
