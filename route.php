@@ -1,6 +1,8 @@
 <?php
 require_once './app/controllers/apiControllerSeries.php';
 require_once './app/controllers/apiControllerEpisodios.php';
+require_once './app/controllers/apiControllerUser.php';
+require_once './app/helpers/apiHelper.php';
 
 require_once 'libs/router.php';
 
@@ -20,5 +22,7 @@ $rt->addRoute('episodio/:ID', 'DELETE', 'apiControllerEpisodios', 'deleteEpisodi
 $rt->addRoute('serie', 'POST', 'apiControllerSeries', 'addSerie');
 $rt->addRoute('episodio', 'POST', 'apiControllerEpisodios', 'addEpisodio');
 
+$rt->addRoute('users/token', 'GET', 'apiControllerUser', 'getToken');
+$rt->addRoute('users/:ID', 'GET', 'apiControllerUser', 'getUsuario');
 
 $rt->route($_GET["resource"], $_SERVER['REQUEST_METHOD']);
